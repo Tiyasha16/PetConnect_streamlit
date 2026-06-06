@@ -1,7 +1,9 @@
 import streamlit as st
 import requests
 
-API_URL = "http://127.0.0.1:8000/api/pets/add/"
+from app import DJANGO_API_URL
+
+API_URL = f"{DJANGO_API_URL}/api/pets/add/"
 FOUND = "Found"
 LOST = "Lost"
 

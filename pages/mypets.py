@@ -1,6 +1,8 @@
 import streamlit as st
 import requests
 
+from app import DJANGO_API_URL
+
 st.set_page_config(
     page_title="Pet Rescue - My Pets",
     page_icon="🐾",
@@ -19,7 +21,7 @@ with col1:
 with col2:
     st.markdown("### 🐶 PetConnect")
 
-API_URL = "http://127.0.0.1:8000/api/pets/mypets/"
+API_URL = f"{DJANGO_API_URL}/api/pets/mypets/"
 
 # 🧠 Ensure user is logged in
 if "access_token" not in st.session_state:

@@ -1,7 +1,9 @@
 import streamlit as st
 import re
 import requests
-REGISTER_API =  "http://127.0.0.1:8000/api/users/register/"
+
+from app import DJANGO_API_URL
+REGISTER_API =  f"{DJANGO_API_URL}/api/users/register/"
 
 st.set_page_config(page_title="Pet Rescue - Register", page_icon="🐾", layout="centered")
 

@@ -5,6 +5,8 @@ from PIL import Image
 from io import BytesIO
 from datetime import datetime
 
+from app import DJANGO_API_URL
+
 st.set_page_config(
     page_title="Pet Rescue - Dashbaord",
     page_icon="🐾",
@@ -12,11 +14,11 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-PROFILE_API = "http://127.0.0.1:8000/api/users/profile/"
-PETS_API = "http://127.0.0.1:8000/api/pets/adoptable/"
-API_NOTIF_LIST = "http://127.0.0.1:8000/api/notifications/"      # GET
-API_NOTIF_MARK = "http://127.0.0.1:8000/api/notifications/mark-read/"  # POST <id>/
-API_NOTIF_MARK_ALL = "http://127.0.0.1:8000/api/notifications/mark-all-read/"  # POST
+PROFILE_API = f"{DJANGO_API_URL}/api/users/profile/"
+PETS_API = f"{DJANGO_API_URL}/api/pets/adoptable/"
+API_NOTIF_LIST = f"{DJANGO_API_URL}/api/notifications/"      # GET
+API_NOTIF_MARK = f"{DJANGO_API_URL}/api/notifications/mark-read/"  # POST <id>/
+API_NOTIF_MARK_ALL = f"{DJANGO_API_URL}/api/notifications/mark-all-read/"  # POST
 
 #pre processing
 # assume JWT token is stored after login
@@ -104,7 +106,7 @@ def requestNotifications(data):
             with row_cols[1]:
                 if not is_read:
                     if st.button("Mark read", key=f"mark-read_{nid}"):
-                        approve_url = f"http://127.0.0.1:8000/api/notifications/mark-read/{nid}/"
+                        approve_url = f"{DJANGO_API_URL}/api/notifications/mark-read/{nid}/"
                         r = requests.post(approve_url, headers=headers)
                         if r.status_code == 200:
                             # clear cache and refresh

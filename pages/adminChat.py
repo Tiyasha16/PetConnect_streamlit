@@ -5,6 +5,8 @@ import streamlit.components.v1 as components
 import html
 from datetime import datetime
 
+from app import DJANGO_API_URL
+
 
 st.set_page_config(
     page_title="Messenger",
@@ -14,9 +16,9 @@ st.set_page_config(
 )
 
 # ----------------- CONFIG -----------------
-API_BASE     = "http://127.0.0.1:8000/api"
+API_BASE     = f"{DJANGO_API_URL}/api"
 API_CONVS    = f"{API_BASE}/chats/conversations"                        # GET
-API_MESSAGES  = "http://127.0.0.1:8000/api/chats/conversations/{conversation_id}/messages/"
+API_MESSAGES  = f"{API_BASE}/chats/conversations/{{conversation_id}}/messages/"
 API_MARK_READ = f"{API_BASE}/chats/{{conv_id}}/mark-read/"  # POST
 API_ASSIGN    = f"{API_BASE}/chats/{{conv_id}}/assign/"     # POST
 

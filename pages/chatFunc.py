@@ -4,8 +4,10 @@ import streamlit.components.v1 as components
 import html
 from datetime import datetime
 
-START_CHAT_API = "http://127.0.0.1:8000/api/chats/conversations/find-or-create/"
-CHAT_MESSAGES_API = "http://127.0.0.1:8000/api/chats/conversations/{conversation_id}/messages/"
+from app import DJANGO_API_URL
+
+START_CHAT_API = f"{DJANGO_API_URL}/api/chats/conversations/find-or-create/"
+CHAT_MESSAGES_API = f"{DJANGO_API_URL}/api/chats/conversations/{{conversation_id}}/messages/"
 
 user = st.session_state["user"]
 userid = user.get('id', '')

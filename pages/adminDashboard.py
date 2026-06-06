@@ -1,13 +1,16 @@
+from django import http
 import streamlit as st
 import requests
+
+from app import DJANGO_API_URL
 
 st.set_page_config(page_title="Admin Dashboard", layout="wide", initial_sidebar_state="collapsed")
 
 # getting api data
-STATS_API = "http://127.0.0.1:8000/api/pets/admin/stats/"
-REQUEST_PENDING_API = "http://127.0.0.1:8000/api/pets/admin/requests/pending/"
-API_LIST = "http://127.0.0.1:8000/api/pets/admin/adoptions/"
-API_MANAGE = "http://127.0.0.1:8000/api/pets/admin/adoptions/"
+STATS_API = f"{DJANGO_API_URL}/api/pets/admin/stats/"
+REQUEST_PENDING_API = f"{DJANGO_API_URL}/api/pets/admin/requests/pending/"
+API_LIST = f"{DJANGO_API_URL}/api/pets/admin/adoptions/"
+API_MANAGE = f"{DJANGO_API_URL}/api/pets/admin/adoptions/"
 
 if "access_token" not in st.session_state:
     st.warning("Please login as admin.")
@@ -230,7 +233,7 @@ def requestDialog(req):
     colA, colB = st.columns(2)
     with colA:
         if st.button("✅ Approve", key=f"approve_{req['request_id']}"):
-            approve_url = f"http://127.0.0.1:8000/api/pets/admin/requests/approve/{req['request_id']}/"
+            approve_url = f"{DJANGO_API_URL}/api/pets/admin/requests/approve/{req['request_id']}/"
             r = requests.post(approve_url, headers=headers)
             if r.status_code == 200:
                 st.success("Request Approved ✅")
@@ -238,7 +241,7 @@ def requestDialog(req):
 
     with colB:
         if st.button("❌ Reject", key=f"reject_{req['request_id']}"):
-            reject_url = f"http://127.0.0.1:8000/api/pets/admin/requests/reject/{req['request_id']}//"
+            reject_url = f"{DJANGO_API_URL}/api/pets/admin/requests/reject/{req['request_id']}//"
             r = requests.post(reject_url, headers=headers)
             if r.status_code == 200:
                 st.warning("Request Rejected ❌")
@@ -340,7 +343,7 @@ def requestAdoptionDialog(pet, adopter, adoption_id):
         if pet_img == "":
             pet_img = "https://placehold.co/300x250?text=No+Image"
         else:
-            pet_img = "http://127.0.0.1:8000"+pet_img
+            pet_img = f"{DJANGO_API_URL}"+pet_img
         st.image(pet_img, use_container_width=True)
     
     with col2:

@@ -1,12 +1,9 @@
 import streamlit as st
 from PIL import Image
+import os
 
-st.set_page_config(
-    page_title="Pet Adoption and Rescue Portal",
-    page_icon="🐾",
-    layout="wide",
-    initial_sidebar_state="collapsed"
-)
+DJANGO_API_URL = os.environ.get("DJANGO_API_BASE_URL", "http://127.0.0.1:8000")
+
 loggedIn = False
 # Check if user is logged in
 if "user" in st.session_state:

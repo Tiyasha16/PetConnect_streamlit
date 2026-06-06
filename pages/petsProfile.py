@@ -2,6 +2,7 @@ import streamlit as st
 import requests
 from PIL import Image
 from io import BytesIO
+from app import DJANGO_API_URL
 from pages.chatFunc import render_chat_popup, open_chat_for_pet
 # Custom CSS for gradient background
 
@@ -21,8 +22,8 @@ if "user" not in st.session_state:
 
 
 
-ADOPT_API = "http://127.0.0.1:8000/api/pets/adopt/"
-CLAIM_API = "http://127.0.0.1:8000/api/pets/claim/"
+ADOPT_API = f"{DJANGO_API_URL}/api/pets/adopt/"
+CLAIM_API = f"{DJANGO_API_URL}/api/pets/claim/"
 
 # nav bar
 col1, col2 = st.columns([5,8])
